@@ -3,7 +3,11 @@ import { useDispatch } from "react-redux";
 
 import Alert from "../Alert";
 import { useForm } from "../../hooks/useForm";
-import { login, startGoogleLogin } from "../../actions/auth";
+import {
+  login,
+  startFacebookLogin,
+  startGoogleLogin,
+} from "../../actions/auth";
 
 export const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -15,11 +19,15 @@ export const LoginScreen = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(login(1234, "juan"));
+    // dispatch(login(email, password));
   };
 
   const handleGoogleLogin = () => {
     dispatch(startGoogleLogin());
+  };
+
+  const handleFacebookLogin = () => {
+    dispatch(startFacebookLogin());
   };
 
   return (
@@ -28,7 +36,10 @@ export const LoginScreen = () => {
       <form onSubmit={handleLogin}>
         <small className="d-block center">Connect with</small>
         <div className="auth__social-networks">
-          <div className="btn btn-social btn-google" onClick={handleGoogleLogin}>
+          <div
+            className="btn btn-social btn-google"
+            onClick={handleGoogleLogin}
+          >
             <div className="social-icon-wrapper">
               <img
                 className="social-icon"
@@ -38,7 +49,10 @@ export const LoginScreen = () => {
             </div>
             <p className="social-text">Google</p>
           </div>
-          <div className="btn btn-social btn-facebook">
+          <div
+            className="btn btn-social btn-facebook"
+            onClick={handleFacebookLogin}
+          >
             <div className="social-icon-wrapper">
               <img
                 className="social-icon"

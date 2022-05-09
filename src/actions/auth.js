@@ -1,6 +1,10 @@
 import { getAuth, signInWithPopup, signOut } from "firebase/auth";
 
-import { firebaseApp, googleAuthProvider } from "../firebase/config";
+import {
+  firebaseApp,
+  googleAuthProvider,
+  facebookAuthProvider,
+} from "../firebase/config";
 import { types } from "../types";
 
 export const startGoogleLogin = () => {
@@ -8,6 +12,20 @@ export const startGoogleLogin = () => {
     const auth = getAuth(firebaseApp);
     signInWithPopup(auth, googleAuthProvider)
       .then(({ user }) => {
+        dispatch(login(user.uid, user.displayName));
+      })
+      .catch((e) => {
+        console.log("Error ocurred", e);
+      });
+  };
+};
+
+export const startFacebookLogin = () => {
+  return (dispatch) => {
+    const auth = getAuth(firebaseApp);
+    signInWithPopup(auth, facebookAuthProvider)
+      .then(({ user }) => {
+        console.log("Loading", user.uid, user.displayName);
         dispatch(login(user.uid, user.displayName));
       })
       .catch((e) => {
