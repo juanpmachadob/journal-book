@@ -1,11 +1,24 @@
 import { Link } from "react-router-dom";
+
 import Alert from "../Alert";
+import { useForm } from "../../hooks/useForm";
 
 export const LoginScreen = () => {
+  const [formValues, handleInputChange] = useForm({
+    email: "juan@test.com",
+    password: 123456,
+  });
+  const { email, password } = formValues;
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log(email, password);
+  };
+
   return (
     <>
       <h1 className="auth__title center">Login</h1>
-      <form>
+      <form onSubmit={handleLogin}>
         <small className="d-block center">Connect with</small>
         <div className="auth__social-networks">
           <div className="btn btn-social btn-google">
@@ -39,6 +52,8 @@ export const LoginScreen = () => {
           name="email"
           placeholder="Enter email..."
           type="email"
+          onChange={handleInputChange}
+          value={email}
         />
         <input
           className="auth__input"
@@ -46,12 +61,17 @@ export const LoginScreen = () => {
           name="password"
           placeholder="Enter password..."
           type="password"
+          onChange={handleInputChange}
+          value={password}
         />
         <button className="btn btn-primary btn-block" type="submit">
           Login
         </button>
         <small className="d-block mt-2">
-          Not account yet? <Link className="link" to="/auth/register">Register</Link>
+          Not account yet?{" "}
+          <Link className="link" to="/auth/register">
+            Register
+          </Link>
         </small>
       </form>
     </>

@@ -1,11 +1,26 @@
 import { Link } from "react-router-dom";
+
 import Alert from "../Alert";
+import { useForm } from "../../hooks/useForm";
 
 export const RegisterScreen = () => {
+  const [formValues, handleInputChange] = useForm({
+    name: "Juan",
+    email: "juan@test.com",
+    password: 123456,
+    password2: 123456,
+  });
+  const { name, email, password, password2 } = formValues;
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    console.log(email, password);
+  };
+
   return (
     <>
       <h1 className="auth__title center">Register</h1>
-      <form>
+      <form onSubmit={handleRegister}>
         {/* <Alert type="error" description="Passwords doesn't match" /> */}
         <input
           className="auth__input"
@@ -13,6 +28,8 @@ export const RegisterScreen = () => {
           name="name"
           placeholder="Enter name..."
           type="text"
+          onChange={handleInputChange}
+          value={name}
         />
         <input
           className="auth__input"
@@ -20,6 +37,8 @@ export const RegisterScreen = () => {
           name="email"
           placeholder="Enter email..."
           type="email"
+          onChange={handleInputChange}
+          value={email}
         />
         <input
           className="auth__input"
@@ -27,6 +46,8 @@ export const RegisterScreen = () => {
           name="password"
           placeholder="Enter password..."
           type="password"
+          onChange={handleInputChange}
+          value={password}
         />
         <input
           className="auth__input"
@@ -34,6 +55,8 @@ export const RegisterScreen = () => {
           name="password2"
           placeholder="Confirm password..."
           type="password"
+          onChange={handleInputChange}
+          value={password2}
         />
         <button className="btn btn-primary btn-block" type="submit">
           Register

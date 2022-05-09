@@ -1,9 +1,11 @@
-import { LoginScreen } from "./components/auth/LoginScreen";
-import { RegisterScreen } from "./components/auth/RegisterScreen";
-import { JournalScreen } from "./components/journal/JournalScreen";
-import { LoadingScreen } from "./components/LoadingScreen";
+import { Provider } from "react-redux";
 import { AppRouter } from "./routers/AppRouter";
+import { store } from "./store";
 
 export const App = () => {
-  return <AppRouter />;
+  return (
+    <Provider store={store}>
+      <AppRouter />
+    </Provider>
+  );
 };
