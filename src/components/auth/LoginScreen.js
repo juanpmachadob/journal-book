@@ -4,9 +4,9 @@ import { useDispatch } from "react-redux";
 import Alert from "../Alert";
 import { useForm } from "../../hooks/useForm";
 import {
-  login,
   startFacebookLogin,
   startGoogleLogin,
+  startLoginWithEmailPassword,
 } from "../../actions/auth";
 
 export const LoginScreen = () => {
@@ -19,7 +19,8 @@ export const LoginScreen = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // dispatch(login(email, password));
+    //TODO: Validations
+    dispatch(startLoginWithEmailPassword(email, password));
   };
 
   const handleGoogleLogin = () => {
