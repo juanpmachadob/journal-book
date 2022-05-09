@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import Alert from "../Alert";
 import { useForm } from "../../hooks/useForm";
+import { login, startGoogleLogin } from "../../actions/auth";
 
 export const LoginScreen = () => {
+  const dispatch = useDispatch();
   const [formValues, handleInputChange] = useForm({
     email: "juan@test.com",
     password: 123456,
@@ -12,7 +15,11 @@ export const LoginScreen = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    dispatch(login(1234, "juan"));
+  };
+
+  const handleGoogleLogin = () => {
+    dispatch(startGoogleLogin());
   };
 
   return (
@@ -21,7 +28,7 @@ export const LoginScreen = () => {
       <form onSubmit={handleLogin}>
         <small className="d-block center">Connect with</small>
         <div className="auth__social-networks">
-          <div className="btn btn-social btn-google">
+          <div className="btn btn-social btn-google" onClick={handleGoogleLogin}>
             <div className="social-icon-wrapper">
               <img
                 className="social-icon"
