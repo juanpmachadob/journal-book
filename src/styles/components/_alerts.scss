@@ -1,0 +1,33 @@
+.alert {
+  border: 1px solid;
+  border-radius: 0.25rem;
+  -webkit-border-radius: 0.25rem;
+  -moz-border-radius: 0.25rem;
+  -ms-border-radius: 0.25rem;
+  -o-border-radius: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+
+  .alert__title {
+    margin: 0 0 0.25rem 0;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+
+  .alert__description {
+    margin: 0;
+    color: $dark-grey;
+  }
+}
+
+.alert__error {
+  background-color: $danger-background;
+  border-color: $danger-border;
+
+  .alert__title {
+    color: $danger-border;
+  }
+}

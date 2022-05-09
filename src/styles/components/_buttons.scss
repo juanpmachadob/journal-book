@@ -1,0 +1,109 @@
+.btn {
+  border: none;
+  border-radius: 0.25rem;
+  -webkit-border-radius: 0.25rem;
+  -moz-border-radius: 0.25rem;
+  -ms-border-radius: 0.25rem;
+  -o-border-radius: 0.25rem;
+  color: $white;
+  cursor: pointer;
+  height: 42px;
+  padding: 0.75rem 2rem;
+  transition: color 0.3s ease;
+  -webkit-transition: color 0.3s ease;
+  -moz-transition: color 0.3s ease;
+  -ms-transition: color 0.3s ease;
+  -o-transition: color 0.3s ease;
+  user-select: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:disabled {
+    cursor: wait;
+  }
+}
+
+.btn-primary {
+  background-color: $primary;
+
+  &:hover {
+    background-color: darken($primary, 10);
+  }
+
+  &:disabled {
+    background-color: lighten($primary, 20);    
+  }
+}
+
+.btn-secondary {
+  background-color: $secondary;
+
+  &:hover {
+    background-color: darken($secondary, 10);
+  }
+
+  &:disabled {
+    background-color: lighten($secondary, 20);    
+  }
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-social {
+  align-items: center;
+  display: flex;
+  flex-basis: calc(50% - 0.5rem);
+  padding: 0.3rem 0 0.3rem 0.35rem;
+
+  .social-icon-wrapper {
+    align-items: center;
+    background-color: $white;
+    border-radius: 10%;
+    display: flex;
+    -webkit-border-radius: 10%;
+    -moz-border-radius: 10%;
+    -ms-border-radius: 10%;
+    -o-border-radius: 10%;
+    padding: 0.25rem;
+  }
+
+  .social-icon {
+    max-width: 25px;
+    max-height: 25px;
+  }
+
+  .social-text {
+    color: $white;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.btn-google {
+  background-color: $google-blue;
+
+  &:hover {
+    background-color: darken($google-blue, 5);
+  }
+
+  &:disabled {
+    background-color: lighten($google-blue, 20);
+  }
+}
+
+.btn-facebook {
+  background-color: $facebook-blue;
+
+  &:hover {
+    background-color: darken($facebook-blue, 5);
+  }
+
+  &:disabled {
+    background-color: lighten($facebook-blue, 20);
+  }
+}

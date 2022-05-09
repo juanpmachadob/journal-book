@@ -1,0 +1,19 @@
+.link {
+  color: $primary;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.icon {
+  color: $dark-grey;
+  cursor: pointer;
+  font-size: 1.5rem;
+
+  &:hover {
+    color: $primary;
+  }
+}

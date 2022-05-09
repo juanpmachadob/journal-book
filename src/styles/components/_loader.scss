@@ -1,0 +1,84 @@
+.loader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.loader__balls {
+  display: flex;
+  flex-direction: row;
+}
+
+.loader__ball {
+  animation: bounce 0.5s alternate infinite;
+  -webkit-animation: bounce 0.5s alternate infinite;
+  background-color: $white;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  height: 50px;
+  margin: 0 1rem;
+  width: 50px;
+
+  &:nth-child(2) {
+    animation-delay: 0.16s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.32s;
+  }
+}
+
+@keyframes bounce {
+  from {
+    transform: scaleX(1.25);
+    -webkit-transform: scaleX(1.25);
+    -moz-transform: scaleX(1.25);
+    -ms-transform: scaleX(1.25);
+    -o-transform: scaleX(1.25);
+  }
+  to {
+    transform: translateY(-50px) scaleX(1);
+    -webkit-transform: translateY(-50px) scaleX(1);
+    -moz-transform: translateY(-50px) scaleX(1);
+    -ms-transform: translateY(-50px) scaleX(1);
+    -o-transform: translateY(-50px) scaleX(1);
+  }
+}
+
+.typewriter h1 {
+  animation: typing 1s steps(40, end) infinite, blink-caret 0.25s step-end infinite;
+  -webkit-animation: typing 1s steps(40, end) infinite, blink-caret 0.25s step-end infinite;
+  border-right: 0.25rem solid;
+  color: $light-grey;
+  font-family: $font-title;
+  font-size: 2.5rem;
+  letter-spacing: 0.15rem;
+  margin: 1.5rem auto;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  50% {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: $white;
+  }
+}

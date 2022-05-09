@@ -1,0 +1,60 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-image: linear-gradient(10deg, $primary 0%, $secondary 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: $dark-white;
+  font-family: $font-text;
+}
+
+.center {
+  text-align: center;
+}
+
+.divider {
+  background: $light-grey;
+  height: 1px;
+  position: relative;
+  width: 80%;
+  margin: 2rem auto;
+}
+
+.divider span {
+  background: $white;
+  color: $dark-grey;
+  margin-right: -14px;
+  position: absolute;
+  right: 50%;
+  text-align: center;
+  top: -10px;
+  width: 30px;
+}
+
+.d-block {
+  display: block;
+}
+
+.mt-1 {
+  margin-top: 0.5rem;
+}
+
+.mt-2 {
+  margin-top: 1rem;
+}
+
+.mt-3 {
+  margin-top: 1.5rem;
+}
+
+.mt-4 {
+  margin-top: 2.5rem;
+}
