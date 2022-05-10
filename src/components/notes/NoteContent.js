@@ -1,7 +1,14 @@
-export const NoteContent = () => {
+import moment from "moment";
+import { useForm } from "../../hooks/useForm";
+
+export const NoteContent = ({ activeNote }) => {
+  const [formValues, handleInputChange] = useForm(activeNote);
+  const { title, body } = formValues;
+  const entryDate = moment(activeNote.date);
+
   return (
     <form className="notes__content">
-      <span className="notes__date">Monday, April 24, 2017</span>
+      <span className="notes__date">{entryDate.format("dddd, MMMM DD, YYYY - hh:mm a")}</span>
       <input
         autoComplete="off"
         className="notes__title-input"
@@ -9,6 +16,8 @@ export const NoteContent = () => {
         name="title"
         placeholder="Lorem ipsum dolor sit amet..."
         type="text"
+        value={title}
+        onChange={handleInputChange}
       />
       <textarea
         className="notes__textarea"
@@ -19,12 +28,14 @@ export const NoteContent = () => {
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint inventore dolore iusto ipsam magni odit asperiores veritatis, voluptatem odio fugit?.
           .
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint inventore dolore iusto ipsam magni odit asperiores veritatis, voluptatem odio fugit? Architecto cumque corporis, dignissimos labore laboriosam molestiae accusantium ex praesentium"
+        value={body}
+        onChange={handleInputChange}
       ></textarea>
       <hr />
       <div className="notes__image">
         <img
-          src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
-          alt="Upload thumbnail"
+          src={activeNote.url ? activeNote.url : "https://via.placeholder.com/300x200?text=Thumbnail"}
+          alt={title ? title : "Upload thumbnail"}
         />
         <input
           autoComplete="off"

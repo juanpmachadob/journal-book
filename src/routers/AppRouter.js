@@ -5,6 +5,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import { firebaseApp } from "../firebase/config";
 import { login } from "../actions/auth";
+import { startLoadingNotes } from "../actions/notes";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 import { AuthRouter } from "./AuthRouter";
@@ -19,10 +20,12 @@ export const AppRouter = () => {
 
   useEffect(() => {
     const auth = getAuth(firebaseApp);
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       if (user?.uid) {
         dispatch(login(user.uid, user.displayName));
         setIsLoggedIn(true);
+
+        dispatch(startLoadingNotes(user.uid));
       } else {
         setIsLoggedIn(false);
       }

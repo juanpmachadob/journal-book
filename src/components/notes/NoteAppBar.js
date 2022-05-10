@@ -1,3 +1,4 @@
+import { useDispatch, useSelector } from "react-redux";
 import {
   IoChevronBack,
   IoChevronForward,
@@ -8,7 +9,15 @@ import {
   IoSave,
 } from "react-icons/io5";
 
+import { startNewNote } from "../../actions/notes";
+
 export const NoteAppBar = () => {
+  const dispatch = useDispatch();
+
+  const handleAddNew = () => {
+    dispatch(startNewNote())
+  }
+
   return (
     <header className="notes__appbar">
       <div className="notes-appbar-items">
@@ -21,7 +30,7 @@ export const NoteAppBar = () => {
         <IoTrashOutline className="icon" title="Delete note" />
         {/* <IoBan className="icon" title="Cancel editing" /> */}
         <div className="notes__appbar-btn" title="Add new note" >
-          <IoAdd className="icon"/>
+          <IoAdd className="icon" onClick={handleAddNew}/>
           {/* <IoSave className="icon"/> */}
         </div>
       </div>
