@@ -15,6 +15,7 @@ import {
 } from "../firebase/config";
 import { types } from "../types";
 import { finishLoading, startLoading } from "./ui";
+import { notesLogoutCleaning } from "./notes";
 
 export const startLoginWithEmailPassword = (email, password) => {
   return (dispatch) => {
@@ -82,6 +83,7 @@ export const startLogout = () => {
     signOut(auth)
       .then(() => {
         dispatch(logout());
+        dispatch(notesLogoutCleaning());
       })
       .catch((err) => {
         Swal.fire("Error", err.code ? err.code : err.toString(), "error");

@@ -27,6 +27,7 @@ export const startNewNote = () => {
     addDoc(collectionRef, newNote)
       .then(({ id }) => {
         dispatch(activeNote(id, newNote));
+        dispatch(addNewNote(id, newNote));
       })
       .catch((err) => {
         Swal.fire("Error", err.code ? err.code : err.toString(), "error");
@@ -36,6 +37,14 @@ export const startNewNote = () => {
 
 export const activeNote = (id, note) => ({
   type: types.notesActive,
+  payload: {
+    id,
+    ...note,
+  },
+});
+
+export const addNewNote = (id, note) => ({
+  type: types.notesAddNew,
   payload: {
     id,
     ...note,
@@ -147,4 +156,8 @@ export const startDeleting = (id) => {
 export const deleteNote = (id) => ({
   type: types.notesDelete,
   payload: id,
+});
+
+export const notesLogoutCleaning = () => ({
+  type: types.notesLogoutCleaning,
 });
