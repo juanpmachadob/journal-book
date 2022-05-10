@@ -9,29 +9,71 @@ import {
   IoSave,
 } from "react-icons/io5";
 
-import { startNewNote } from "../../actions/notes";
+import {
+  finishEditing,
+  startEditing,
+  startNewNote,
+  startSaveNote,
+} from "../../actions/notes";
 
 export const NoteAppBar = () => {
   const dispatch = useDispatch();
+  const { active, editing } = useSelector((state) => state.notes);
 
   const handleAddNew = () => {
-    dispatch(startNewNote())
-  }
+    dispatch(startNewNote());
+  };
+
+  const handleStartEditing = () => {
+    dispatch(startEditing());
+  };
+
+  const handleFinishEditing = () => {
+    dispatch(finishEditing());
+  };
+
+  const handleSave = () => {
+    dispatch(startSaveNote());
+  };
 
   return (
     <header className="notes__appbar">
       <div className="notes-appbar-items">
-        <IoChevronBack className="icon" title="Next note" />
-        <IoChevronForward className="icon" title="Previous note" />
-        {/* Editting... */}
+        {editing
+          ? "Editing..."
+          : active && (
+              <>
+                <IoChevronBack className="icon" title="Next note" />
+                <IoChevronForward className="icon" title="Previous note" />
+              </>
+            )}
       </div>
       <div className="notes-appbar-items">
-        <IoCreateOutline className="icon" title="Edit note" />
-        <IoTrashOutline className="icon" title="Delete note" />
-        {/* <IoBan className="icon" title="Cancel editing" /> */}
-        <div className="notes__appbar-btn" title="Add new note" >
-          <IoAdd className="icon" onClick={handleAddNew}/>
-          {/* <IoSave className="icon"/> */}
+        {editing ? (
+          <IoBan
+            className="icon"
+            title="Cancel editing"
+            onClick={handleFinishEditing}
+          />
+        ) : (
+          active && (
+            <>
+              <IoCreateOutline
+                className="icon"
+                title="Edit note"
+                onClick={handleStartEditing}
+              />
+              <IoTrashOutline className="icon" title="Delete note" />
+            </>
+          )
+        )}
+
+        <div className="notes__appbar-btn" title="Add new note">
+          {editing ? (
+            <IoSave className="icon" onClick={handleSave} />
+          ) : (
+            <IoAdd className="icon" onClick={handleAddNew} />
+          )}
         </div>
       </div>
     </header>

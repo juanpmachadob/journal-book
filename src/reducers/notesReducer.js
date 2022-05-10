@@ -3,6 +3,7 @@ import { types } from "../types";
 const initialState = {
   notes: [],
   active: null,
+  editing: false,
 };
 
 export const notesReducer = (state = initialState, action) => {
@@ -19,6 +20,26 @@ export const notesReducer = (state = initialState, action) => {
       return {
         ...state,
         notes: [...action.payload],
+      };
+
+    case types.notesStartEditing:
+      return {
+        ...state,
+        editing: true,
+      };
+
+    case types.notesFinishEditing:
+      return {
+        ...state,
+        editing: false,
+      };
+
+    case types.notesUpdate:
+      return {
+        ...state,
+        notes: state.notes.map((note) =>
+          note.id === action.payload.id ? action.payload.note : note
+        ),
       };
 
     default:

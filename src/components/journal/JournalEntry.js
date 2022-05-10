@@ -8,10 +8,12 @@ export const JournalEntry = ({ id, date, title, body, url }) => {
   const { active } = useSelector((state) => state.notes);
 
   const entryDate = moment(date);
-  const entryTitle = `${title.substr(0, 18)}`;
-  const entryContent = `${body.substr(0, 50)}...`;
+
+  const entryTitle = title.length > 18 ? `${title.substr(0, 15)}...` : title;
+  const entryBody = body.length > 50 ? `${body.substr(0, 50)}...` : body;
 
   const handleEntryClick = () => {
+    if (active?.id === id) return;
     dispatch(
       activeNote(id, {
         date,
@@ -34,8 +36,8 @@ export const JournalEntry = ({ id, date, title, body, url }) => {
         />
       </div>
       <div className="journal__entry-body">
-        <p className="journal__entry-title">{entryTitle}</p>
-        <p className="journal__entry-content">{entryContent}</p>
+        <p className="journal__entry-title" title={title}>{entryTitle}</p>
+        <p className="journal__entry-content" title={body}>{entryBody}</p>
       </div>
       <div className="journal__entry-date-box">
         <b>{entryDate.format("DD")}</b>
