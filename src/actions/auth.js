@@ -21,9 +21,8 @@ export const startLoginWithEmailPassword = (email, password) => {
     dispatch(startLoading());
     const auth = getAuth(firebaseApp);
     signInWithEmailAndPassword(auth, email, password)
-      .catch(({ code }) => {
-        // TODO: Swal messages
-        Swal.fire("Error", code, "error");
+      .catch((err) => {
+        Swal.fire("Error", err.code ? err.code : err.toString(), "error");
       })
       .finally(() => dispatch(finishLoading()));
   };
@@ -38,8 +37,8 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
         await updateProfile(user, { displayName: name });
         dispatch(login(user.uid, user.displayName));
       })
-      .catch(({ code }) => {
-        Swal.fire("Error", code, "error");
+      .catch((err) => {
+        Swal.fire("Error", err.code ? err.code : err.toString(), "error");
       })
       .finally(() => dispatch(finishLoading()));
   };
@@ -50,8 +49,8 @@ export const startGoogleLogin = () => {
     dispatch(startLoading());
     const auth = getAuth(firebaseApp);
     signInWithPopup(auth, googleAuthProvider)
-      .catch(({ code }) => {
-        Swal.fire("Error", code, "error");
+      .catch((err) => {
+        Swal.fire("Error", err.code ? err.code : err.toString(), "error");
       })
       .finally(() => dispatch(finishLoading()));
   };
@@ -62,8 +61,8 @@ export const startFacebookLogin = () => {
     dispatch(startLoading());
     const auth = getAuth(firebaseApp);
     signInWithPopup(auth, facebookAuthProvider)
-      .catch(({ code }) => {
-        Swal.fire("Error", code, "error");
+      .catch((err) => {
+        Swal.fire("Error", err.code ? err.code : err.toString(), "error");
       })
       .finally(() => dispatch(finishLoading()));
   };
@@ -84,8 +83,8 @@ export const startLogout = () => {
       .then(() => {
         dispatch(logout());
       })
-      .catch(({ code }) => {
-        Swal.fire("Error", code, "error");
+      .catch((err) => {
+        Swal.fire("Error", err.code ? err.code : err.toString(), "error");
       });
   };
 };

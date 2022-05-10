@@ -32,7 +32,7 @@ export const JournalEntry = ({ id, date, title, body, url }) => {
       <div className="journal__entry-picture">
         <img
           src={url ? url : "https://via.placeholder.com/300x200?text=Thumbnail"}
-          alt={title ? title : "Entry thumbnail"}
+          alt="Thumbnail"
         />
       </div>
       <div className="journal__entry-body">

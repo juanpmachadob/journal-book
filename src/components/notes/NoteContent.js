@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import { activeNote } from "../../actions/notes";
+import { activeNote, startUploading } from "../../actions/notes";
 import { useForm } from "../../hooks/useForm";
 
 export const NoteContent = ({ currentNote }) => {
   const dispatch = useDispatch();
+  const { editing } = useSelector((state) => state.notes);
   const [formValues, handleInputChange, reset] = useForm(currentNote);
   const { id, title, body } = formValues;
   const entryDate = moment(currentNote.date);
@@ -17,6 +18,17 @@ export const NoteContent = ({ currentNote }) => {
   useEffect(() => {
     dispatch(activeNote(formValues.id, { ...formValues }));
   }, [formValues, dispatch]);
+
+  const handlePictureUpload = () => {
+    // e.preventDefault();
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      dispatch(startUploading(file));
+    }
+  };
 
   return (
     <form className="notes__content">
@@ -30,6 +42,7 @@ export const NoteContent = ({ currentNote }) => {
         name="title"
         placeholder="Lorem ipsum dolor sit amet..."
         type="text"
+        readOnly={!editing}
         value={title}
         onChange={handleInputChange}
       />
@@ -42,6 +55,7 @@ export const NoteContent = ({ currentNote }) => {
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint inventore dolore iusto ipsam magni odit asperiores veritatis, voluptatem odio fugit?.
           .
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint inventore dolore iusto ipsam magni odit asperiores veritatis, voluptatem odio fugit? Architecto cumque corporis, dignissimos labore laboriosam molestiae accusantium ex praesentium"
+        readOnly={!editing}
         value={body}
         onChange={handleInputChange}
       ></textarea>
@@ -49,11 +63,11 @@ export const NoteContent = ({ currentNote }) => {
       <div className="notes__image">
         <img
           src={
-            activeNote.url
-              ? activeNote.url
+            currentNote.url
+              ? currentNote.url
               : "https://via.placeholder.com/300x200?text=Thumbnail"
           }
-          alt={title ? title : "Upload thumbnail"}
+          alt="Upload thumbnail"
         />
         <input
           autoComplete="off"
@@ -61,7 +75,9 @@ export const NoteContent = ({ currentNote }) => {
           className="btn btn-secondary notes__image-input"
           id="image"
           name="image"
-          type="image"
+          type="file"
+          onChange={handleFileChange}
+          onClick={handlePictureUpload}
         />
       </div>
     </form>

@@ -11,6 +11,7 @@ import {
 
 import {
   finishEditing,
+  startDeleting,
   startEditing,
   startNewNote,
   startSaveNote,
@@ -28,12 +29,16 @@ export const NoteAppBar = () => {
     dispatch(startEditing());
   };
 
-  const handleFinishEditing = () => {
+  const handleCancelEditing = () => {
     dispatch(finishEditing());
   };
 
+  const handleDelete = () => {
+    dispatch(startDeleting(active.id));
+  };
+
   const handleSave = () => {
-    dispatch(startSaveNote());
+    dispatch(startSaveNote(active));
   };
 
   return (
@@ -53,7 +58,7 @@ export const NoteAppBar = () => {
           <IoBan
             className="icon"
             title="Cancel editing"
-            onClick={handleFinishEditing}
+            onClick={handleCancelEditing}
           />
         ) : (
           active && (
@@ -63,7 +68,11 @@ export const NoteAppBar = () => {
                 title="Edit note"
                 onClick={handleStartEditing}
               />
-              <IoTrashOutline className="icon" title="Delete note" />
+              <IoTrashOutline
+                className="icon"
+                title="Delete note"
+                onClick={handleDelete}
+              />
             </>
           )
         )}
