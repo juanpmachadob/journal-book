@@ -1,31 +1,61 @@
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import validator from "validator";
 
 import Alert from "../Alert";
 import { useForm } from "../../hooks/useForm";
 import { startRegisterWithEmailPasswordName } from "../../actions/auth";
+import { removeError, setError } from "../../actions/ui";
 
 export const RegisterScreen = () => {
   const dispatch = useDispatch();
+  const { loading, msgError } = useSelector((state) => state.ui);
+
   const [formValues, handleInputChange] = useForm({
     name: "Juan",
     email: "juan@test.com",
-    password: 123456,
-    password2: 123456,
+    password: "12345678-Aa",
+    password2: "12345678-Aa",
   });
   const { name, email, password, password2 } = formValues;
 
   const handleRegister = (e) => {
     e.preventDefault();
-    //TODO: Validations
-    dispatch(startRegisterWithEmailPasswordName(email, password, name))
+    if (isFormValid()) {
+      dispatch(startRegisterWithEmailPasswordName(email, password, name));
+    }
+  };
+
+  const isFormValid = () => {
+    if (name.trim().length === 0) {
+      dispatch(setError("Name is required."));
+      return false;
+    } else if (!validator.isEmail(email)) {
+      dispatch(setError("Email is not valid."));
+      return false;
+    } else if (
+      !validator.isStrongPassword(password.toString()) ||
+      password.length > 32
+    ) {
+      dispatch(
+        setError(
+          "Password should be between 8-32 characters and should include 1 number, 1 symbol, 1 lowercase and 1 uppercase."
+        )
+      );
+      return false;
+    } else if (password !== password2) {
+      dispatch(setError("Passwords should match."));
+      return false;
+    }
+    dispatch(removeError());
+    return true;
   };
 
   return (
     <>
       <h1 className="auth__title center">Register</h1>
       <form onSubmit={handleRegister}>
-        {/* <Alert type="error" description="Passwords doesn't match" /> */}
+        {msgError && <Alert type="error" description={msgError} />}
         <input
           className="auth__input"
           id="name"
@@ -62,7 +92,11 @@ export const RegisterScreen = () => {
           onChange={handleInputChange}
           value={password2}
         />
-        <button className="btn btn-primary btn-block" type="submit">
+        <button
+          className="btn btn-primary btn-block"
+          type="submit"
+          disabled={loading}
+        >
           Register
         </button>
         <small className="d-block mt-2">

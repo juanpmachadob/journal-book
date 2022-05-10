@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -13,58 +14,58 @@ import {
   facebookAuthProvider,
 } from "../firebase/config";
 import { types } from "../types";
+import { finishLoading, startLoading } from "./ui";
 
 export const startLoginWithEmailPassword = (email, password) => {
   return (dispatch) => {
+    dispatch(startLoading());
     const auth = getAuth(firebaseApp);
     signInWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        // dispatch(login(user.uid, user.displayName));
-      })
-      .catch((e) => {
+      .catch(({ code }) => {
         // TODO: Swal messages
-        console.log("Error", e);
-      });
+        Swal.fire("Error", code, "error");
+      })
+      .finally(() => dispatch(finishLoading()));
   };
 };
 
 export const startRegisterWithEmailPasswordName = (email, password, name) => {
   return (dispatch) => {
+    dispatch(startLoading());
     const auth = getAuth(firebaseApp);
     createUserWithEmailAndPassword(auth, email, password)
       .then(async ({ user }) => {
         await updateProfile(user, { displayName: name });
         dispatch(login(user.uid, user.displayName));
       })
-      .catch((e) => {
-        console.log("Error ocurred", e);
-      });
+      .catch(({ code }) => {
+        Swal.fire("Error", code, "error");
+      })
+      .finally(() => dispatch(finishLoading()));
   };
 };
 
 export const startGoogleLogin = () => {
   return (dispatch) => {
+    dispatch(startLoading());
     const auth = getAuth(firebaseApp);
     signInWithPopup(auth, googleAuthProvider)
-      .then(({ user }) => {
-        // dispatch(login(user.uid, user.displayName));
+      .catch(({ code }) => {
+        Swal.fire("Error", code, "error");
       })
-      .catch((e) => {
-        console.log("Error ocurred", e);
-      });
+      .finally(() => dispatch(finishLoading()));
   };
 };
 
 export const startFacebookLogin = () => {
   return (dispatch) => {
+    dispatch(startLoading());
     const auth = getAuth(firebaseApp);
     signInWithPopup(auth, facebookAuthProvider)
-      .then(({ user }) => {
-        // dispatch(login(user.uid, user.displayName));
+      .catch(({ code }) => {
+        Swal.fire("Error", code, "error");
       })
-      .catch((e) => {
-        console.log("Error ocurred", e);
-      });
+      .finally(() => dispatch(finishLoading()));
   };
 };
 
@@ -77,10 +78,15 @@ export const login = (uid, displayName) => ({
 });
 
 export const startLogout = () => {
-  return async (dispatch) => {
+  return (dispatch) => {
     const auth = getAuth(firebaseApp);
-    await signOut(auth);
-    dispatch(logout());
+    signOut(auth)
+      .then(() => {
+        dispatch(logout());
+      })
+      .catch(({ code }) => {
+        Swal.fire("Error", code, "error");
+      });
   };
 };
 

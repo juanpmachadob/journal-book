@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import validator from "validator";
 
 import Alert from "../Alert";
 import { useForm } from "../../hooks/useForm";
@@ -8,19 +9,23 @@ import {
   startGoogleLogin,
   startLoginWithEmailPassword,
 } from "../../actions/auth";
+import { removeError, setError } from "../../actions/ui";
 
 export const LoginScreen = () => {
   const dispatch = useDispatch();
+  const { loading, msgError } = useSelector((state) => state.ui);
+
   const [formValues, handleInputChange] = useForm({
     email: "juan@test.com",
-    password: 123456,
+    password: "12345678-Aa",
   });
   const { email, password } = formValues;
 
   const handleLogin = (e) => {
     e.preventDefault();
-    //TODO: Validations
-    dispatch(startLoginWithEmailPassword(email, password));
+    if (isFormValid()) {
+      dispatch(startLoginWithEmailPassword(email, password));
+    }
   };
 
   const handleGoogleLogin = () => {
@@ -31,6 +36,15 @@ export const LoginScreen = () => {
     dispatch(startFacebookLogin());
   };
 
+  const isFormValid = () => {
+    if (!validator.isEmail(email)) {
+      dispatch(setError("Email is not valid."));
+      return false;
+    }
+    dispatch(removeError());
+    return true;
+  };
+
   return (
     <>
       <h1 className="auth__title center">Login</h1>
@@ -39,6 +53,7 @@ export const LoginScreen = () => {
         <div className="auth__social-networks">
           <div
             className="btn btn-social btn-google"
+            disabled={loading}
             onClick={handleGoogleLogin}
           >
             <div className="social-icon-wrapper">
@@ -52,6 +67,7 @@ export const LoginScreen = () => {
           </div>
           <div
             className="btn btn-social btn-facebook"
+            disabled={loading}
             onClick={handleFacebookLogin}
           >
             <div className="social-icon-wrapper">
@@ -67,7 +83,7 @@ export const LoginScreen = () => {
         <div className="divider">
           <span>or</span>
         </div>
-        {/* <Alert type="error" description="Passwords doesn't match" /> */}
+        {msgError && <Alert type="error" description={msgError} />}
         <input
           className="auth__input"
           id="email"
@@ -86,7 +102,11 @@ export const LoginScreen = () => {
           onChange={handleInputChange}
           value={password}
         />
-        <button className="btn btn-primary btn-block" type="submit">
+        <button
+          className="btn btn-primary btn-block"
+          type="submit"
+          disabled={loading}
+        >
           Login
         </button>
         <small className="d-block mt-2">
