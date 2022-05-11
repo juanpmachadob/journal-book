@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
+import { HashRouter as Router, Switch, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
