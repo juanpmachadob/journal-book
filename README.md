@@ -4,7 +4,7 @@ Journal App web application to list, add, edit, remove and upload images of your
 
 *CRUD, image upload, auth system with google and facebook authentication*
 
-## [Try demo](https://ju4npx.github.io/journal-app/)
+## [Try demo](https://ju4npx.github.io/Journal-App/)
 
 <img src="./preview.jpeg">
 
