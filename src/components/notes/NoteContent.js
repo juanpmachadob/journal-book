@@ -76,7 +76,7 @@ export const NoteContent = ({ currentActiveNote }) => {
             }
             alt="Upload thumbnail"
           />
-          {editing && <div className="notes__image-upload animate__animated animate__fadeIn animate__faster"><IoCloudUpload /></div>}
+          {editing && <div className="notes__image-upload animate__animated animate__fadeIn animate__faster" title="Upload image"><IoCloudUpload /></div>}
         </label>
         {editing && (
           <>
