@@ -20,6 +20,14 @@
     outline: none;
   }
 
+  &:active:enabled {
+    transform: scale(0.975);
+    -webkit-transform: scale(0.975);
+    -moz-transform: scale(0.975);
+    -ms-transform: scale(0.975);
+    -o-transform: scale(0.975);
+  }
+
   &:disabled {
     cursor: default;
   }
@@ -33,19 +41,7 @@
   }
 
   &:disabled {
-    background-color: lighten($primary, 20);    
-  }
-}
-
-.btn-secondary {
-  background-color: $secondary;
-
-  &:hover {
-    background-color: darken($secondary, 10);
-  }
-
-  &:disabled {
-    background-color: lighten($secondary, 20);    
+    background-color: lighten($primary, 20);
   }
 }
 

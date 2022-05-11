@@ -1,19 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { activeNote } from "../../actions/notes";
-import { useState } from "react";
 
 export const JournalEntry = ({ id, date, title, body, url }) => {
   const dispatch = useDispatch();
-  const { active } = useSelector((state) => state.notes);
+  const { active: currentActiveNote, editing } = useSelector((state) => state.notes);
 
   const entryDate = moment(date);
 
-  const entryTitle = title.length > 18 ? `${title.substr(0, 15)}...` : title;
-  const entryBody = body.length > 50 ? `${body.substr(0, 50)}...` : body;
+  const entryTitle = title.length === 0 ? "Amazing title" : title.length > 18 ? `${title.substr(0, 15)}...` : title;
+  const entryBody = body.length === 0 ? "Amazing note description!" : body.length > 50 ? `${body.substr(0, 50)}...` : body;
 
   const handleEntryClick = () => {
-    if (active?.id === id) return;
+    if (editing || currentActiveNote?.id === id) return;
     dispatch(
       activeNote(id, {
         date,
@@ -26,7 +25,7 @@ export const JournalEntry = ({ id, date, title, body, url }) => {
 
   return (
     <div
-      className={`journal__entry ${active?.id === id ? "active" : ""}`}
+      className={`journal__entry ${currentActiveNote?.id === id ? "active" : ""} ${editing ? "editing" : ""} animate__animated animate__fadeIn animate__faster`}
       onClick={handleEntryClick}
     >
       <div className="journal__entry-picture">
@@ -37,7 +36,7 @@ export const JournalEntry = ({ id, date, title, body, url }) => {
       </div>
       <div className="journal__entry-body">
         <p className="journal__entry-title" title={title}>{entryTitle}</p>
-        <p className="journal__entry-content" title={body}>{entryBody}</p>
+        <p className="journal__entry-content">{entryBody}</p>
       </div>
       <div className="journal__entry-date-box">
         <b>{entryDate.format("DD")}</b>

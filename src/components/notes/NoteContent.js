@@ -1,27 +1,32 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
+
+import {
+  IoCloudUpload
+} from "react-icons/io5";
+
 import { activeNote, startUploading } from "../../actions/notes";
 import { useForm } from "../../hooks/useForm";
 
-export const NoteContent = ({ currentNote }) => {
+export const NoteContent = ({ currentActiveNote }) => {
   const dispatch = useDispatch();
   const { editing } = useSelector((state) => state.notes);
-  const [formValues, handleInputChange, reset] = useForm(currentNote);
+  const [formValues, handleInputChange, reset] = useForm(currentActiveNote);
   const { id, title, body } = formValues;
-  const entryDate = moment(currentNote.date);
+  const entryDate = moment(currentActiveNote.date);
 
-  if (currentNote.id !== id) {
-    reset(currentNote);
+  if (currentActiveNote.id !== id || currentActiveNote.url !== formValues.url) {
+    reset(currentActiveNote);
   }
 
   useEffect(() => {
     dispatch(activeNote(formValues.id, { ...formValues }));
   }, [formValues, dispatch]);
 
-  const handlePictureUpload = () => {
-    // e.preventDefault();
-  };
+  useEffect(() => {
+    if (editing) document.getElementById("title").focus();
+  }, [editing]);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -31,7 +36,12 @@ export const NoteContent = ({ currentNote }) => {
   };
 
   return (
-    <form className="notes__content">
+    <form
+      className="notes__content"
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
+    >
       <span className="notes__date">
         {entryDate.format("dddd, MMMM DD, YYYY - hh:mm a")}
       </span>
@@ -40,7 +50,7 @@ export const NoteContent = ({ currentNote }) => {
         className="notes__title-input"
         id="title"
         name="title"
-        placeholder="Lorem ipsum dolor sit amet..."
+        placeholder="Amazing title"
         type="text"
         readOnly={!editing}
         value={title}
@@ -50,35 +60,37 @@ export const NoteContent = ({ currentNote }) => {
         className="notes__textarea"
         id="body"
         name="body"
-        placeholder="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint inventore dolore iusto ipsam magni odit asperiores veritatis, voluptatem odio fugit? Architecto cumque corporis, dignissimos labore laboriosam molestiae accusantium ex praesentium.
-          .
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint inventore dolore iusto ipsam magni odit asperiores veritatis, voluptatem odio fugit?.
-          .
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint inventore dolore iusto ipsam magni odit asperiores veritatis, voluptatem odio fugit? Architecto cumque corporis, dignissimos labore laboriosam molestiae accusantium ex praesentium"
+        placeholder="Amazing note description!"
         readOnly={!editing}
         value={body}
         onChange={handleInputChange}
       ></textarea>
       <hr />
       <div className="notes__image">
-        <img
-          src={
-            currentNote.url
-              ? currentNote.url
-              : "https://via.placeholder.com/300x200?text=Thumbnail"
-          }
-          alt="Upload thumbnail"
-        />
-        <input
-          autoComplete="off"
-          alt="Upload image"
-          className="btn btn-secondary notes__image-input"
-          id="image"
-          name="image"
-          type="file"
-          onChange={handleFileChange}
-          onClick={handlePictureUpload}
-        />
+        <label htmlFor="image" className={`notes__image-label ${editing ? "editing" : ""}`}>
+          <img
+            src={
+              currentActiveNote.url
+                ? currentActiveNote.url
+                : "https://via.placeholder.com/300x200?text=Thumbnail"
+            }
+            alt="Upload thumbnail"
+          />
+          {editing && <div className="notes__image-upload animate__animated animate__fadeIn animate__faster"><IoCloudUpload /></div>}
+        </label>
+        {editing && (
+          <>
+            <input
+              alt="Upload image"
+              accept="image/*"
+              className="notes__image-input"
+              id="image"
+              name="image"
+              type="file"
+              onChange={handleFileChange}
+            />
+          </>
+        )}
       </div>
     </form>
   );

@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 import {
   IoChevronBack,
   IoChevronForward,
@@ -10,7 +11,9 @@ import {
 } from "react-icons/io5";
 
 import {
-  finishEditing,
+  cancelEditing,
+  nextNote,
+  previousNote,
   startDeleting,
   startEditing,
   startNewNote,
@@ -19,7 +22,9 @@ import {
 
 export const NoteAppBar = () => {
   const dispatch = useDispatch();
-  const { active, editing } = useSelector((state) => state.notes);
+  const { active: currentActiveNote, editing } = useSelector(
+    (state) => state.notes
+  );
 
   const handleAddNew = () => {
     dispatch(startNewNote());
@@ -30,15 +35,30 @@ export const NoteAppBar = () => {
   };
 
   const handleCancelEditing = () => {
-    dispatch(finishEditing());
+    dispatch(cancelEditing(currentActiveNote.id));
   };
 
   const handleDelete = () => {
-    dispatch(startDeleting(active.id));
+    Swal.fire({
+      title: "Delete note",
+      text: "Do you want to delete the current note?",
+      icon: "warning",
+      confirmButtonText: "Yes, delete!",
+      showCancelButton: true,
+    }).then(({ isConfirmed }) => {
+      if (isConfirmed) dispatch(startDeleting(currentActiveNote.id));
+    });
   };
 
   const handleSave = () => {
-    dispatch(startSaveNote(active));
+    dispatch(startSaveNote(currentActiveNote));
+  };
+
+  const handlePreviousNote = () => {
+    dispatch(previousNote(currentActiveNote.id));
+  };
+  const handleNextNote = () => {
+    dispatch(nextNote(currentActiveNote.id));
   };
 
   return (
@@ -46,10 +66,18 @@ export const NoteAppBar = () => {
       <div className="notes-appbar-items">
         {editing
           ? "Editing..."
-          : active && (
+          : currentActiveNote && (
               <>
-                <IoChevronBack className="icon" title="Next note" />
-                <IoChevronForward className="icon" title="Previous note" />
+                <IoChevronBack
+                  className="icon"
+                  title="Previous note"
+                  onClick={handlePreviousNote}
+                />
+                <IoChevronForward
+                  className="icon"
+                  title="Next note"
+                  onClick={handleNextNote}
+                />
               </>
             )}
       </div>
@@ -61,7 +89,7 @@ export const NoteAppBar = () => {
             onClick={handleCancelEditing}
           />
         ) : (
-          active && (
+          currentActiveNote && (
             <>
               <IoCreateOutline
                 className="icon"
@@ -77,13 +105,23 @@ export const NoteAppBar = () => {
           )
         )}
 
-        <div className="notes__appbar-btn" title="Add new note">
-          {editing ? (
-            <IoSave className="icon" onClick={handleSave} />
-          ) : (
-            <IoAdd className="icon" onClick={handleAddNew} />
-          )}
-        </div>
+        {editing ? (
+          <div
+            className="notes__appbar-btn"
+            title="Add new note"
+            onClick={handleSave}
+          >
+            <IoSave className="icon" />
+          </div>
+        ) : (
+          <div
+            className="notes__appbar-btn"
+            title="Add new note"
+            onClick={handleAddNew}
+          >
+            <IoAdd className="icon" />
+          </div>
+        )}
       </div>
     </header>
   );

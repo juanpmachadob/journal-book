@@ -1,4 +1,3 @@
-import { type } from "@testing-library/user-event/dist/type";
 import {
   addDoc,
   collection,
@@ -68,10 +67,9 @@ export const setNotes = (notes) => ({
   payload: notes,
 });
 
-export const startSaveNote = (activeNote) => {
+export const startSaveNote = ({ id, ...note }) => {
   return (dispatch, getState) => {
     const { uid } = getState().auth;
-    const { id, ...note } = activeNote;
 
     if (!note.url) delete note.url;
 
@@ -79,17 +77,14 @@ export const startSaveNote = (activeNote) => {
     updateDoc(collectionRef, note)
       .then(() => {
         dispatch(refreshNote(id, note));
-      })
-      .catch((err) => {
-        Swal.fire("Error", err.code ? err.code : err.toString(), "error");
-      })
-      .finally(() => {
-        dispatch(finishEditing());
         Swal.fire(
           "Saved",
           `The note "${note.title}" has been saved successfully.`,
           "success"
         );
+      })
+      .catch((err) => {
+        Swal.fire("Error", err.code ? err.code : err.toString(), "error");
       });
   };
 };
@@ -109,9 +104,11 @@ export const startEditing = () => ({
   type: types.notesStartEditing,
 });
 
-export const finishEditing = () => ({
-  type: types.notesFinishEditing,
+export const cancelEditing = (id) => ({
+  type: types.notesCancelEditing,
+  payload: id
 });
+
 
 export const startUploading = (file) => {
   return (dispatch, getState) => {
@@ -146,6 +143,11 @@ export const startDeleting = (id) => {
     deleteDoc(noteRef)
       .then(() => {
         dispatch(deleteNote(id));
+        Swal.fire(
+          "Deleted",
+          `The note has been deleted successfully.`,
+          "success"
+        );
       })
       .catch((err) => {
         Swal.fire("Error", err.code ? err.code : err.toString(), "error");
@@ -160,4 +162,14 @@ export const deleteNote = (id) => ({
 
 export const notesLogoutCleaning = () => ({
   type: types.notesLogoutCleaning,
+});
+
+export const nextNote = (id) => ({
+  type: types.notesNext,
+  payload: id,
+});
+
+export const previousNote = (id) => ({
+  type: types.notesPrevious,
+  payload: id,
 });

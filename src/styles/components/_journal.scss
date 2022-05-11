@@ -54,8 +54,12 @@
   height: 90px;
   user-select: none;
 
-  &:hover {
+  &:not(.editing):not(.active):hover {
     background-color: darken($dark-white, 2);
+  }
+
+  &.editing, &.editing.active{
+    cursor: not-allowed;
   }
 
   &.active {
@@ -84,19 +88,6 @@
     -ms-transition: all 0.3s;
     -o-transition: all 0.3s;
     width: 60px;
-
-    &:hover {
-      border-radius: 0.25rem;
-      -webkit-border-radius: 0.25rem;
-      -moz-border-radius: 0.25rem;
-      -ms-border-radius: 0.25rem;
-      -o-border-radius: 0.25rem;
-      transform: scale(1.1);
-      -webkit-transform: scale(1.1);
-      -moz-transform: scale(1.1);
-      -ms-transform: scale(1.1);
-      -o-transform: scale(1.1);
-    }
   }
 }
 

@@ -16,16 +16,41 @@ export const notesReducer = (state = initialState, action) => {
         },
       };
 
+    case types.notesNext:
+      const nextIndex = state.notes.findIndex(
+        (note) => note.id === action.payload
+      );
+      return {
+        ...state,
+        active:
+          state.notes[
+            nextIndex + 1 > state.notes.length - 1 ? 0 : nextIndex + 1 || 0
+          ],
+      };
+
+    case types.notesPrevious:
+      const previousIndex = state.notes.findIndex(
+        (note) => note.id === action.payload
+      );
+      return {
+        ...state,
+        active:
+          state.notes[
+            previousIndex - 1 < 0 ? state.notes.length - 1 : previousIndex - 1
+          ],
+      };
+
     case types.notesAddNew:
       return {
         ...state,
         notes: [action.payload, ...state.notes],
+        editing: true,
       };
 
     case types.notesLoad:
       return {
         ...state,
-        notes: [...action.payload],
+        notes: action.payload.sort((a, b) => b.date - a.date),
       };
 
     case types.notesStartEditing:
@@ -34,15 +59,17 @@ export const notesReducer = (state = initialState, action) => {
         editing: true,
       };
 
-    case types.notesFinishEditing:
+    case types.notesCancelEditing:
       return {
         ...state,
         editing: false,
+        active: state.notes.find((note) => note.id === action.payload),
       };
 
     case types.notesUpdate:
       return {
         ...state,
+        editing: false,
         notes: state.notes.map((note) =>
           note.id === action.payload.id ? action.payload.note : note
         ),

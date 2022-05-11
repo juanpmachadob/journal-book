@@ -4,11 +4,11 @@ import { NoteAppBar } from "./NoteAppBar";
 import { NoteContent } from "./NoteContent";
 
 export const NoteScreen = () => {
-  const { active: currentNote } = useSelector((state) => state.notes);
+  const { active: currentActiveNote } = useSelector((state) => state.notes);
   return (
     <div className="notes__main">
       <NoteAppBar />
-      {currentNote ? <NoteContent currentNote={currentNote}/> : <EmptyNotes />}
+      {currentActiveNote ? <NoteContent currentActiveNote={currentActiveNote}/> : <EmptyNotes />}
     </div>
   );
 };
