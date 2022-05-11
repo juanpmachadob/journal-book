@@ -1,6 +1,7 @@
 {
   "name": "journal-app",
-  "version": "0.1.0",
+  "homepage": "https://ju4npx.github.io/Journal-App/",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
