@@ -1,6 +1,6 @@
 # Journal App
 
-Journal App web application to list, add, edit, remove and upload images of your important notes.
+Journal App web application to list, add, edit, remove and upload images of your important notes. Developed in React using Hooks and Redux, Firebase and SASS. [Built with 🛠️](#built-with-️)
 
 *CRUD, image upload, auth system with google and facebook authentication*
 
@@ -69,7 +69,6 @@ $ npm run start
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ## Built with 🛠️
-:
 
 * [React](https://es.reactjs.org/) - Frontend framework
 * [React Redux](https://react-redux.js.org/) - State management
