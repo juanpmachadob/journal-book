@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import validator from "validator";
 
-import Alert from "../Alert";
-import { useForm } from "../../hooks/useForm";
+import Alert from "components/Alert";
+import { useForm } from "hooks/useForm";
 import {
   startFacebookLogin,
   startGoogleLogin,
   startLoginWithEmailPassword,
-} from "../../actions/auth";
-import { removeError, setError } from "../../actions/ui";
+} from "actions/auth";
+import { removeError, setError } from "actions/ui";
 
 export const LoginScreen = () => {
   const dispatch = useDispatch();

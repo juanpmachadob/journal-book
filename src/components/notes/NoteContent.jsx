@@ -6,8 +6,8 @@ import {
   IoCloudUpload
 } from "react-icons/io5";
 
-import { activeNote, startUploading } from "../../actions/notes";
-import { useForm } from "../../hooks/useForm";
+import { activeNote, startUploading } from "actions/notes";
+import { useForm } from "hooks/useForm";
 
 export const NoteContent = ({ currentActiveNote }) => {
   const dispatch = useDispatch();

@@ -3,15 +3,15 @@ import { HashRouter as Router, Switch, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-import { firebaseApp } from "../firebase/config";
-import { login } from "../actions/auth";
-import { startLoadingNotes } from "../actions/notes";
-import { PrivateRoute } from "./PrivateRoute";
-import { PublicRoute } from "./PublicRoute";
-import { AuthRouter } from "./AuthRouter";
+import { firebaseApp } from "services/firebase";
+import { login } from "actions/auth";
+import { startLoadingNotes } from "actions/notes";
+import { PrivateRoute } from "routers/PrivateRoute";
+import { PublicRoute } from "routers/PublicRoute";
+import { AuthRouter } from "routers/AuthRouter";
 
-import { JournalScreen } from "../components/journal/JournalScreen";
-import { LoadingScreen } from "../components/LoadingScreen";
+import { JournalScreen } from "components/journal/JournalScreen";
+import { LoadingScreen } from "components/LoadingScreen";
 
 export const AppRouter = () => {
   const dispatch = useDispatch();

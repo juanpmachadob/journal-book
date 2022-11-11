@@ -1,5 +1,5 @@
-import { NoteScreen } from "../notes/NoteScreen";
-import { JournalSidebar } from "./JournalSidebar";
+import { NoteScreen } from "components/notes/NoteScreen";
+import { JournalSidebar } from "components/journal/JournalSidebar";
 
 export const JournalScreen = () => {
   return (

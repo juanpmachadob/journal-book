@@ -1,5 +1,5 @@
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { storage } from "../firebase/config";
+import { storage } from "services/firebase";
 
 export const fileUpload = async (file, uid, noteId) => {
   const fileRef = ref(storage, `${uid}/journal/notes/${noteId}`);

@@ -1,13 +1,13 @@
-@import "./base/normalize";
-@import "./base/settings";
-@import "./base/index";
+@import "styles/base/normalize";
+@import "styles/base/settings";
+@import "styles/base/index";
 
 // Components
 
-@import "./components/loader";
-@import "./components/auth";
-@import "./components/journal";
-@import "./components/notes";
-@import "./components/buttons";
-@import "./components/links";
-@import "./components/alerts";
+@import "styles/components/loader";
+@import "styles/components/auth";
+@import "styles/components/journal";
+@import "styles/components/notes";
+@import "styles/components/buttons";
+@import "styles/components/links";
+@import "styles/components/alerts";

@@ -1,7 +1,7 @@
 import { IoPersonCircle, IoLogOutOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { startLogout } from "../../actions/auth";
-import { JournalEntries } from "./JournalEntries";
+import { startLogout } from "actions/auth";
+import { JournalEntries } from "components/journal/JournalEntries";
 
 export const JournalSidebar = () => {
   const { name } = useSelector((state) => state.auth);

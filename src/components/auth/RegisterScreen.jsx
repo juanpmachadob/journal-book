@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import validator from "validator";
 
-import Alert from "../Alert";
-import { useForm } from "../../hooks/useForm";
-import { startRegisterWithEmailPasswordName } from "../../actions/auth";
-import { removeError, setError } from "../../actions/ui";
+import Alert from "components/Alert";
+import { useForm } from "hooks/useForm";
+import { startRegisterWithEmailPasswordName } from "actions/auth";
+import { removeError, setError } from "actions/ui";
 
 export const RegisterScreen = () => {
   const dispatch = useDispatch();

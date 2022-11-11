@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import { EmptyNotes } from "./EmptyNotes";
-import { NoteAppBar } from "./NoteAppBar";
-import { NoteContent } from "./NoteContent";
+import { EmptyNotes } from "components/notes/EmptyNotes";
+import { NoteAppBar } from "components/notes/NoteAppBar";
+import { NoteContent } from "components/notes/NoteContent";
 
 export const NoteScreen = () => {
   const { active: currentActiveNote } = useSelector((state) => state.notes);

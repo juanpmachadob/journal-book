@@ -7,10 +7,10 @@ import {
 } from "firebase/firestore";
 import Swal from "sweetalert2";
 
-import { db } from "../firebase/config";
-import { fileUpload } from "../helpers/fileUpload";
-import { loadNotes } from "../helpers/loadNotes";
-import { types } from "../types";
+import { db } from "services/firebase";
+import { fileUpload } from "helpers/fileUpload";
+import { loadNotes } from "helpers/loadNotes";
+import { types } from "types";
 
 export const startNewNote = () => {
   return (dispatch, getState) => {

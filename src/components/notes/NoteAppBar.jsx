@@ -18,7 +18,7 @@ import {
   startEditing,
   startNewNote,
   startSaveNote,
-} from "../../actions/notes";
+} from "actions/notes";
 
 export const NoteAppBar = () => {
   const dispatch = useDispatch();

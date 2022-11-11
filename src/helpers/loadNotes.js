@@ -1,5 +1,5 @@
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebase/config";
+import { db } from "services/firebase";
 
 export const loadNotes = async (uid) => {
   const notesSnap = await getDocs(collection(db, `${uid}/journal/notes`));

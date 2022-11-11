@@ -12,10 +12,10 @@ import {
   firebaseApp,
   googleAuthProvider,
   facebookAuthProvider,
-} from "../firebase/config";
-import { types } from "../types";
-import { finishLoading, startLoading } from "./ui";
-import { notesLogoutCleaning } from "./notes";
+} from "services/firebase";
+import { types } from "types";
+import { finishLoading, startLoading } from "actions/ui";
+import { notesLogoutCleaning } from "actions/notes";
 
 export const startLoginWithEmailPassword = (email, password) => {
   return (dispatch) => {
