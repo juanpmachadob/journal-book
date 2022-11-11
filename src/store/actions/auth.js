@@ -14,8 +14,8 @@ import {
   facebookAuthProvider,
 } from "services/firebase";
 import { types } from "types";
-import { finishLoading, startLoading } from "actions/ui";
-import { notesLogoutCleaning } from "actions/notes";
+import { finishLoading, startLoading } from "store/actions/ui";
+import { notesLogoutCleaning } from "store/actions/notes";
 
 export const startLoginWithEmailPassword = (email, password) => {
   return (dispatch) => {

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import { activeNote } from "actions/notes";
+import { activeNote } from "store/actions/notes";
 
 export const JournalEntry = ({ id, date, title, body, url }) => {
   const dispatch = useDispatch();

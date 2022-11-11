@@ -4,8 +4,8 @@ import validator from "validator";
 
 import Alert from "components/Alert";
 import { useForm } from "hooks/useForm";
-import { startRegisterWithEmailPasswordName } from "actions/auth";
-import { removeError, setError } from "actions/ui";
+import { startRegisterWithEmailPasswordName } from "store/actions/auth";
+import { removeError, setError } from "store/actions/ui";
 
 export const RegisterScreen = () => {
   const dispatch = useDispatch();

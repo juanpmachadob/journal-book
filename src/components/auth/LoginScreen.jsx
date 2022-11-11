@@ -8,8 +8,8 @@ import {
   startFacebookLogin,
   startGoogleLogin,
   startLoginWithEmailPassword,
-} from "actions/auth";
-import { removeError, setError } from "actions/ui";
+} from "store/actions/auth";
+import { removeError, setError } from "store/actions/ui";
 
 export const LoginScreen = () => {
   const dispatch = useDispatch();

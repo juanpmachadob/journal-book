@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import { firebaseApp } from "services/firebase";
-import { login } from "actions/auth";
-import { startLoadingNotes } from "actions/notes";
+import { login } from "store/actions/auth";
+import { startLoadingNotes } from "store/actions/notes";
 import { PrivateRoute } from "routers/PrivateRoute";
 import { PublicRoute } from "routers/PublicRoute";
 import { AuthRouter } from "routers/AuthRouter";

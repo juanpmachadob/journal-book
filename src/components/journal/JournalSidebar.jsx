@@ -1,6 +1,6 @@
 import { IoPersonCircle, IoLogOutOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { startLogout } from "actions/auth";
+import { startLogout } from "store/actions/auth";
 import { JournalEntries } from "components/journal/JournalEntries";
 
 export const JournalSidebar = () => {
