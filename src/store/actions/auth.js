@@ -24,7 +24,8 @@ export const startLoginWithEmailPassword = (email, password) => {
     const auth = getAuth(firebaseApp);
     signInWithEmailAndPassword(auth, email, password)
       .catch((err) => {
-        Swal.fire("Error", err.code ? err.code : err.toString(), "error");
+        const msg = handleErrorMessage(err);
+        Swal.fire("Error", msg, "error");
       })
       .finally(() => dispatch(finishLoading()));
   };
@@ -40,7 +41,8 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
         dispatch(login(user.uid, user.displayName));
       })
       .catch((err) => {
-        Swal.fire("Error", err.code ? err.code : err.toString(), "error");
+        const msg = handleErrorMessage(err);
+        Swal.fire("Error", msg, "error");
       })
       .finally(() => dispatch(finishLoading()));
   };
@@ -89,7 +91,8 @@ export const startLogout = () => {
         dispatch(notesLogoutCleaning());
       })
       .catch((err) => {
-        Swal.fire("Error", err.code ? err.code : err.toString(), "error");
+        const msg = handleErrorMessage(err);
+        Swal.fire("Error", msg, "error");
       });
   };
 };
