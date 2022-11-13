@@ -92,14 +92,14 @@
   }
 }
 
-.btn-facebook {
-  background-color: $facebook-blue;
+.btn-github {
+  background-color: $github-black;
 
   &:hover {
-    background-color: darken($facebook-blue, 5);
+    background-color: darken($github-black, 5);
   }
 
   &:disabled {
-    background-color: lighten($facebook-blue, 20);
+    background-color: lighten($github-black, 20);
   }
 }

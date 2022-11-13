@@ -5,11 +5,13 @@ import validator from "validator";
 import Alert from "components/Alert";
 import { useForm } from "hooks/useForm";
 import {
-  startFacebookLogin,
+  startGithubLogin,
   startGoogleLogin,
   startLoginWithEmailPassword,
 } from "store/actions/auth";
 import { removeError, setError } from "store/actions/ui";
+import googleLogo from "assets/images/google-logo.svg";
+import githubLogo from "assets/images/github-logo.svg";
 
 export const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -32,8 +34,8 @@ export const LoginScreen = () => {
     dispatch(startGoogleLogin());
   };
 
-  const handleFacebookLogin = () => {
-    dispatch(startFacebookLogin());
+  const handleGithubLogin = () => {
+    dispatch(startGithubLogin());
   };
 
   const isFormValid = () => {
@@ -59,25 +61,25 @@ export const LoginScreen = () => {
             <div className="social-icon-wrapper">
               <img
                 className="social-icon"
-                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                src={googleLogo}
                 alt="google button"
               />
             </div>
             <p className="social-text">Google</p>
           </div>
           <div
-            className="btn btn-social btn-facebook"
+            className="btn btn-social btn-github"
             disabled={loading}
-            onClick={handleFacebookLogin}
+            onClick={handleGithubLogin}
           >
             <div className="social-icon-wrapper">
               <img
                 className="social-icon"
-                src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
-                alt="facebook button"
+                src={githubLogo}
+                alt="github button"
               />
             </div>
-            <p className="social-text">Facebook</p>
+            <p className="social-text">Github</p>
           </div>
         </div>
         <div className="divider">

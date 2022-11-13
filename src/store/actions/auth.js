@@ -10,12 +10,13 @@ import {
 
 import {
   firebaseApp,
-  googleAuthProvider,
-  facebookAuthProvider,
+  googleAuthProvider, 
+  githubAuthProvider,
 } from "services/firebase";
 import { types } from "types";
 import { finishLoading, startLoading } from "store/actions/ui";
 import { notesLogoutCleaning } from "store/actions/notes";
+import { handleErrorMessage } from "helpers/errorHandler";
 
 export const startLoginWithEmailPassword = (email, password) => {
   return (dispatch) => {
@@ -51,19 +52,21 @@ export const startGoogleLogin = () => {
     const auth = getAuth(firebaseApp);
     signInWithPopup(auth, googleAuthProvider)
       .catch((err) => {
-        Swal.fire("Error", err.code ? err.code : err.toString(), "error");
+        const msg = handleErrorMessage(err);
+        Swal.fire("Error", msg, "error");
       })
       .finally(() => dispatch(finishLoading()));
   };
 };
 
-export const startFacebookLogin = () => {
+export const startGithubLogin = () => {
   return (dispatch) => {
     dispatch(startLoading());
     const auth = getAuth(firebaseApp);
-    signInWithPopup(auth, facebookAuthProvider)
+    signInWithPopup(auth, githubAuthProvider)
       .catch((err) => {
-        Swal.fire("Error", err.code ? err.code : err.toString(), "error");
+        const msg = handleErrorMessage(err);
+        Swal.fire("Error", msg, "error");
       })
       .finally(() => dispatch(finishLoading()));
   };
