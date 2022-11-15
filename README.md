@@ -1,16 +1,16 @@
-# Journal App
+# Journal Book
 
-Journal App web application to list, add, edit, remove and upload images of your important notes. Developed in React using Hooks and Redux, Firebase and SASS. [Built with 🛠️](#built-with-️)
+Journal Book is a web application to list, add, edit, remove and upload images of your important notes. Developed in React using Hooks and Redux, Firebase and SASS. [Built with 🛠️](#built-with-️)
 
-*CRUD, image upload, auth system with google and facebook authentication*
+*CRUD, image upload, auth system with google and github authentication*
 
-## [Try demo](https://ju4npx.github.io/Journal-App/)
+## [Try demo](https://my-journalbook.web.app/)
 
 <img src="./preview.jpeg">
 
 ### Table of contents 📃
 
-- [Journal App](#journal-app)
+- [Journal Book](#journal-book)
   - [Try demo](#try-demo)
     - [Table of contents 📃](#table-of-contents-)
   - [Starting 🚀](#starting-)
@@ -34,10 +34,10 @@ Local installation:
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/Ju4npx/Journal-App.git
+$ git clone https://github.com/juanpmachadob/journal-book.git
 
 # Change directory to the project path
-$ cd Journal-App
+$ cd journal-book
 ```
 
 Setup:
@@ -47,6 +47,9 @@ $ npm install
 
 # Copy .env file
 $ cp .env.example .env
+
+# Copy .firebaserc file
+$ cp .firebaserc.example .firebaserc
 ```
 server **.env** file setup:
 
@@ -70,10 +73,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ## Built with 🛠️
 
-* [React](https://es.reactjs.org/) - Frontend framework
-* [React Redux](https://react-redux.js.org/) - State management
-* [Firebase](https://firebase.google.com/) - Backend platform
-* [SASS](https://sass-lang.com/) - CSS extension
+* [React](https://es.reactjs.org/)
+* [React Redux](https://react-redux.js.org/)
+* [Firebase](https://firebase.google.com/)
+* [SASS](https://sass-lang.com/)
 
 ---
-⌨️ with ❤️ by [Juan Pablo Machado](https://github.com/Ju4npx ) 😊 
+⌨️ with ❤️ by [Juan Pablo Machado](https://github.com/juanpmachadob ) 😊 
