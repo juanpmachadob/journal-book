@@ -10,8 +10,8 @@ import { PrivateRoute } from "routers/PrivateRoute";
 import { PublicRoute } from "routers/PublicRoute";
 import { AuthRouter } from "routers/AuthRouter";
 
-import { JournalScreen } from "components/journal/JournalScreen";
 import { Loader } from "components/Loader";
+import { JournalScreen } from "pages/JournalScreen";
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
