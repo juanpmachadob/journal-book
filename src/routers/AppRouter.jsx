@@ -11,7 +11,7 @@ import { PublicRoute } from "routers/PublicRoute";
 import { AuthRouter } from "routers/AuthRouter";
 
 import { JournalScreen } from "components/journal/JournalScreen";
-import { LoadingScreen } from "components/LoadingScreen";
+import { Loader } from "components/Loader";
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ export const AppRouter = () => {
   }, [dispatch]);
 
   if (loading) {
-    return <LoadingScreen />;
+    return <Loader />;
   }
 
   return (
