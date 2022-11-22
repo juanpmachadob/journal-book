@@ -4,8 +4,11 @@ export const EmptyNotes = () => {
   return (
     <div className="notes__empty">
       <IoDocumentText />
-      <span>No entries created</span>
-      <p>Click the <b>+</b> button above to create a new entry.</p>
+      <span>No entries selected</span>
+      <p>
+        Click the <b>+</b> button above to create a new entry or select an
+        existing one.
+      </p>
     </div>
   );
 };
