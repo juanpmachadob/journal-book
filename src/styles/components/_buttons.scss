@@ -53,6 +53,7 @@
   align-items: center;
   display: flex;
   flex-basis: calc(50% - 0.5rem);
+  gap: 1rem;
   padding: 0.3rem 0 0.3rem 0.35rem;
 
   .social-icon-wrapper {
@@ -75,7 +76,7 @@
   .social-text {
     color: $white;
     margin: 0;
-    text-align: center;
+    text-align: start;
     width: 100%;
   }
 }

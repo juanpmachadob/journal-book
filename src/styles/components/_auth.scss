@@ -46,6 +46,11 @@
 
 .auth__social-networks {
   display: flex;
+  gap: 1rem;
   justify-content: space-between;
   margin-top: 0.75rem;
+  
+  @media (max-width: 400px) {
+    flex-direction: column;
+  }
 }
