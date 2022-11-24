@@ -30,6 +30,12 @@
   @media (min-width: 768px) {
     position: unset;
     display: flex;
+
+    &.mobile-menu {
+      &::before {
+        display: none;
+      }
+    }
   }
 }
 

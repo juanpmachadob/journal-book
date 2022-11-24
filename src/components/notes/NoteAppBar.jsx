@@ -20,6 +20,7 @@ import {
   startNewNote,
   startSaveNote,
 } from "store/actions/notes";
+import { toggleMobileSidebar } from "store/actions/ui";
 
 export const NoteAppBar = () => {
   const dispatch = useDispatch();
@@ -62,9 +63,9 @@ export const NoteAppBar = () => {
     dispatch(nextNote(currentActiveNote.id));
   };
 
-  const handleOpenSidebar = () => {
-  }
-
+  const handleToggleSidebar = () => {
+    dispatch(toggleMobileSidebar());
+  };
 
   return (
     <header className="notes__appbar">
@@ -72,7 +73,7 @@ export const NoteAppBar = () => {
         <IoMenu
           className="icon icon--mobile"
           title="Open sidebar"
-          onClick={handleOpenSidebar}
+          onClick={handleToggleSidebar}
         />
         {editing
           ? "Editing..."
