@@ -4,19 +4,12 @@
   height: $navbar-height;
   justify-content: space-between;
   padding-left: 1rem;
-
-  .icon {
-    margin-right: 1.5rem;
-
-    &:last-of-type {
-      margin-right: 0;
-    }
-  }
 }
 
 .notes-appbar-items {
   align-items: center;
   display: flex;
+  gap: 1rem;
   user-select: none;
 }
 
@@ -27,7 +20,6 @@
   cursor: pointer;
   display: flex;
   height: 100%;
-  margin-left: 1.5rem;
   padding: 0 1rem;
 
   .icon,
@@ -185,6 +177,8 @@ hr {
   flex-direction: column;
   height: calc(100% - #{$navbar-height});
   justify-content: center;
+  padding: 0 1rem;
+  text-align: center;
 
   svg {
     font-size: 8rem;

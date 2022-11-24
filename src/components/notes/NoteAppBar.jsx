@@ -8,6 +8,7 @@ import {
   IoAdd,
   IoBan,
   IoSave,
+  IoMenu,
 } from "react-icons/io5";
 
 import {
@@ -61,9 +62,18 @@ export const NoteAppBar = () => {
     dispatch(nextNote(currentActiveNote.id));
   };
 
+  const handleOpenSidebar = () => {
+  }
+
+
   return (
     <header className="notes__appbar">
       <div className="notes-appbar-items">
+        <IoMenu
+          className="icon icon--mobile"
+          title="Open sidebar"
+          onClick={handleOpenSidebar}
+        />
         {editing
           ? "Editing..."
           : currentActiveNote && (
