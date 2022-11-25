@@ -26,7 +26,8 @@ export const NoteContent = ({ currentActiveNote }) => {
 
   useEffect(() => {
     if (editing) document.getElementById("title").focus();
-  }, [editing]);
+    reset()
+  }, [editing, reset]);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
