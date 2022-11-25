@@ -2,9 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
-import {
-  IoCloudUpload
-} from "react-icons/io5";
+import { IoCloudUpload } from "react-icons/io5";
 
 import { activeNote, startUploading } from "store/actions/notes";
 import { useForm } from "hooks/useForm";
@@ -26,8 +24,9 @@ export const NoteContent = ({ currentActiveNote }) => {
 
   useEffect(() => {
     if (editing) document.getElementById("title").focus();
-    reset()
-  }, [editing, reset]);
+    reset();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editing]);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -68,7 +67,10 @@ export const NoteContent = ({ currentActiveNote }) => {
       ></textarea>
       <hr />
       <div className="notes__image">
-        <label htmlFor="image" className={`notes__image-label ${editing ? "editing" : ""}`}>
+        <label
+          htmlFor="image"
+          className={`notes__image-label ${editing ? "editing" : ""}`}
+        >
           <img
             src={
               currentActiveNote.url
@@ -77,7 +79,14 @@ export const NoteContent = ({ currentActiveNote }) => {
             }
             alt="Upload thumbnail"
           />
-          {editing && <div className="notes__image-upload animate__animated animate__fadeIn animate__faster" title="Upload image"><IoCloudUpload /></div>}
+          {editing && (
+            <div
+              className="notes__image-upload animate__animated animate__fadeIn animate__faster"
+              title="Upload image"
+            >
+              <IoCloudUpload />
+            </div>
+          )}
         </label>
         {editing && (
           <>
