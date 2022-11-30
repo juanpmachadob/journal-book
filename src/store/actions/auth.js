@@ -74,11 +74,12 @@ export const startGithubLogin = () => {
   };
 };
 
-export const login = (uid, displayName) => ({
+export const login = (uid, displayName, photoUrl) => ({
   type: types.login,
   payload: {
     uid,
     displayName,
+    photoUrl
   },
 });
 

@@ -22,7 +22,7 @@ export const AppRouter = () => {
     const auth = getAuth(firebaseApp);
     onAuthStateChanged(auth, async (user) => {
       if (user?.uid) {
-        dispatch(login(user.uid, user.displayName));
+        dispatch(login(user.uid, user.displayName, user.photoURL));
         setIsLoggedIn(true);
 
         dispatch(startLoadingNotes(user.uid));

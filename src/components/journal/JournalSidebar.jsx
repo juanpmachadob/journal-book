@@ -5,7 +5,7 @@ import { JournalEntries } from "components/journal/JournalEntries";
 import { toggleMobileSidebar } from "store/actions/ui";
 
 export const JournalSidebar = () => {
-  const { name } = useSelector((state) => state.auth);
+  const { name, photoUrl } = useSelector((state) => state.auth);
   const { mobileSidebarOpen } = useSelector((state) => state.ui);
   const dispatch = useDispatch();
 
@@ -23,7 +23,14 @@ export const JournalSidebar = () => {
     >
       <header className="journal__sidebar-navbar">
         <div className="journal__sidebar-navbar__user">
-          <IoPersonCircle />
+          {photoUrl && (
+            <img
+              className="journal__sidebar-navbar__user-photo"
+              src={photoUrl}
+              alt={name}
+            />
+          )}
+          {!photoUrl && <IoPersonCircle size={38} />}
           <span>{name}</span>
         </div>
         <IoLogOutOutline

@@ -78,6 +78,13 @@
   }
 }
 
+.journal__sidebar-navbar__user-photo {
+  border-radius: 50%;
+  height: 30px;
+  object-fit: cover;
+  width: 30px;
+}
+
 .journal__content {
   background-color: $white;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
